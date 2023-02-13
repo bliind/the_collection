@@ -1,0 +1,54 @@
+.tabs {
+    margin-left: 2%;
+    width: 90%;
+}
+.tab {
+    display: inline-block;
+    padding: 0.75em 1.5em;
+    margin-left: 0.25em;
+    background-color: #454545;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: #FFF;
+    text-decoration: none;
+}
+.tab.active {
+    background-color: #232323;
+}
+
+@media only screen and (max-width: 825px) {
+    .tabs {
+        align-self: flex-start;
+        margin-left: 4em;
+        height: min-content;
+        overflow: visible;
+        width: min-content;
+        z-index: 14;
+        background-color: #454545;
+        border-radius: 5px;
+        display: grid;
+        text-align: center;
+        position: relative;
+    }
+    .tabs:after {
+        position: absolute;
+        display: block;
+        content: '\25BE';
+        right: 0.5em;
+        top: 0.75em;
+        pointer-events: none;
+    }
+    .tabs.active:after {
+        display: none;
+    }
+    .tabs > * {
+        margin-left: 0;
+        display: none;
+    }
+    .tabs > .active {
+        display: initial;
+    }
+    .tabs.active > * {
+        display: inline-block;
+    }
+}

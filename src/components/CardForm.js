@@ -18,7 +18,7 @@ export class CardForm extends Component {
             image_file_name: '',
             video_link: '',
             release_status: '',
-            video_status: '',
+            tags: '',
         };
 
         this.state = {
@@ -57,7 +57,7 @@ export class CardForm extends Component {
                     image_file_name: card.image_link,
                     video_link: card.video_link,
                     release_status: card.release_status,
-                    video_status: card.video_status,
+                    tags: card.tags,
                 }
             }));
         }
@@ -70,7 +70,6 @@ export class CardForm extends Component {
             newForm[name] = value;
             this.setState({...this.state, form: newForm});
         }
-        console.log(name);
 
         if (name === 'image_file') {
             const {card_name, variant_name, artist_name} = this.state.form;
@@ -90,6 +89,7 @@ export class CardForm extends Component {
         this.setState(() => ({loading: true}));
 
         const formdata = new FormData(this.formElem);
+        for (let entry of formdata) { console.log(entry) }
         formdata.append('token', this.context.user.token)
 
         const {urlBase} = this.context;
@@ -139,14 +139,23 @@ export class CardForm extends Component {
                 image_file_name: '',
                 video_link: '',
                 release_status: '',
-                video_status: '',
+                tags: '',
             }
         })
     }
 
     render() {
         const {error, fieldError, loading} = this.state;
-        const {card_name, variant_name, artist_name, image_file, image_file_name, video_link, release_status, video_status} = this.state.form;
+        const {
+            card_name,
+            variant_name,
+            artist_name,
+            image_file,
+            image_file_name,
+            video_link,
+            release_status,
+            tags
+        } = this.state.form;
         const {action} = this.props;
 
         return (
@@ -167,7 +176,7 @@ export class CardForm extends Component {
                     <TextInput id='image_file_name' fieldError={fieldError} label='Image Filename' value={image_file_name} onChange={this.handleChange} />
                     <TextInput id='video_link' fieldError={fieldError} label='Video Link' value={video_link} onChange={this.handleChange} />
                     <SelectBox id='release_status' fieldError={fieldError} label='Release Status' value={release_status} onChange={this.handleChange} options={['RELEASED', 'UNRELEASED']} />
-                    <SelectBox id='video_status' fieldError={fieldError} label='Video Status' value={video_status} onChange={this.handleChange} options={['RECORDED', 'NEEDED']} />
+                    <TextInput id='tags' fieldError={fieldError} label='Tags (Comma Separated)' value={tags} onChange={this.handleChange} />
                     <Buttons label={`${action} Card`} loading={loading} />
                 </form>
                 <Link className='top-right-link' to='/collection'>Back</Link>

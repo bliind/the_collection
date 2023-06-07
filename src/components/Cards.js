@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import newid from '../util/newid'
 import Card from './Card';
 
 export class Cards extends Component {
@@ -8,8 +7,8 @@ export class Cards extends Component {
 
         return (
             <div className='content'>
-                {cards.map(card => (
-                    <Card key={newid()} card={card} setSelectedCard={setSelectedCard} />
+                {cards.map((card, index) => (
+                    <Card key={index} card={card} setSelectedCard={setSelectedCard} />
                 ))}
             </div>
         )

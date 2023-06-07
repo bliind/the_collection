@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 
 export class Credits extends Component {
     constructor(props) {
@@ -14,7 +13,7 @@ export class Credits extends Component {
     }
 
     linkClick(e) {
-        e.stopPropagation();
+        // e.stopPropagation();
     }
 
     render() {
@@ -22,23 +21,25 @@ export class Credits extends Component {
 
         return (<>
             {creditsActive ? (
-                <div className={`credits-overlay ${creditsActive ? 'active' : ''}`} onClick={this.onClick}>
-                    <div className='credits-container'>
+                <div className={`overlay dark ${creditsActive ? 'active' : ''}`} onClick={this.onClick}>
+                    <div className='overlay-container'>
                         <div className='credits-entry credits-creator'>
                             Creator of <b>The Collection</b>:
-                            <Link to='#' onClick={this.linkClick}>Plixie</Link>
-                        </div>
-                        <div className='credits-entry credits-editor'>
-                            Diligent Editor:
-                            <Link to='#' onClick={this.linkClick}>CraigRTG</Link>
+                            <p><strong>Plixie</strong></p>
                         </div>
                         <div className='credits-entry credits-website'>
                             Website Conversion:
-                            <Link to='#' onClick={this.linkClick}>./swn</Link>
+                            <p><strong>./swn</strong></p>
+                        </div>
+                        <div className='credits-entry credits-website'>
+                            Diligent Editor:
+                            <p><strong>CraigRTG</strong></p>
                         </div>
                         <div className='credits-entry credits-contributors'>
                             Huge Thank You To The Contibutors:
                             <ul>
+                                <li>SiX1SE7EN</li>
+                                <li>SuperTechGod</li>
                                 <li>iDabBandito</li>
                                 <li>Exrian</li>
                                 <li>Loser</li>

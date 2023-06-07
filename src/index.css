@@ -16,6 +16,8 @@
     --grey13: 239,239,239;
     --yellow: 255,249,0;
     --red: 177,14,14; 
+    --orange: 255, 160, 32;
+    --link: #84c1ff;
 }
 
 html,body,#root {height: 100%}
@@ -49,6 +51,10 @@ a, a:link, a:visited {
 a:hover {
     color: rgb(var(--grey9));
     text-decoration: underline;
+}
+
+a.color-link {
+    color: var(--link);
 }
 
 .btn,
@@ -143,15 +149,23 @@ form {
 
 .filter-clear,
 .filter-number,
-.filter-input {
+.filter-input,
+.filter-unreleased,
+.filter-needed {
     background: transparent;
     border-width: 0;
     padding: 0.5rem 0.6rem;
 }
 
-.filter-clear {
+.filter-clear,
+.filter-needed {
     cursor: pointer;
     border-width: 0 1px;
+}
+
+.filter-unreleased,
+.filter-needed {
+    white-space: nowrap;
 }
 
 .container {
@@ -191,7 +205,8 @@ form {
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
-    grid-gap: 0.75em;
+    grid-gap: 2em;
+    /* row-gap: 2em; */
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     justify-content: center;
@@ -247,26 +262,34 @@ form {
 
 .badge {
     position: absolute;
-    left: 0;
+    left: 10%;
     right: 0;
-    top: calc(50% - 1em);
-    width: 100%;
+    top: 0;
+    width: 80%;
     text-align: center;
     background-color: rgb(var(--red));
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     z-index: 14;
-    color: rgb(var(--text));
+    color: rgb(var(--grey13));
     font-weight: bold;
-    padding: 0.4em;
+    padding: 0.3em;
+    border: 1px solid rgba(var(--grey1), 0.5);
+    border-top: 0;
+    filter: drop-shadow(0 2px 4px rgba(var(--grey1), 0.5));
 }
 
 .badge.needed:not(.unreleased) {
     background-color: rgb(var(--yellow));
-    top: calc(50% - 3em);
     color: rgb(var(--grey1));
 }
 
-.overlay,
-.credits-overlay {
+.unreleased.recorded .badge {
+    background-color: rgb(var(--orange));
+    color: rgb(var(--grey1));
+}
+
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -282,14 +305,17 @@ form {
     z-index: 17;
     pointer-events: none;
 }
-.credits-overlay {
+.overlay.dark {
     background-color:rgba(var(--grey1), 0.97);
 }
 
-.overlay.active,
-.credits-overlay.active {
+.overlay.active {
     opacity: 1;
     pointer-events: initial;
+}
+
+.overlay-container {
+    width: 80%;
 }
 
 .overlay img {
@@ -330,6 +356,15 @@ form {
 }
 .credits-contributors ul li {
     margin: 0.5rem;
+}
+
+.help-screen {
+    font-size: 14pt;
+    line-height: 1.5em;
+    text-align: center;
+}
+.help-screen h2 {
+    margin-block: 1rem;
 }
 
 .top-right-link {
@@ -373,6 +408,51 @@ form {
     color: #8ad8fd !important;
 }
 
+.video-holder {
+    display: flex;
+    place-items: center;
+}
+
+.left-arrow,
+.right-arrow {
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    width: 6em;
+    height: 6em;
+    background-color: rgba(var(--grey4), 0.5);
+    color: rgb(var(--grey13));
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.left-arrow:after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 1.75em solid transparent;
+    border-bottom: 1.75em solid transparent;
+    border-right: 1.75em solid rgb(var(--grey13));
+    margin-left: -0.875em;
+}
+.right-arrow:after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 1.75em solid transparent;
+    border-bottom: 1.75em solid transparent;
+    border-left: 1.75em solid rgb(var(--grey13));
+    margin-right: -0.875em;
+}
+.left-arrow:active:after {
+    border-right-color: rgb(var(--grey2));
+}
+.right-arrow:active:after {
+    border-left-color: rgb(var(--grey2));
+}
+
 /* loader */
 .loader {
     width: 2.5em;
@@ -401,13 +481,22 @@ form {
 }
 .spin {animation: spin 1.5s linear infinite}
 
+@media only screen and (max-width: 1419px) {
+    .content {
+        grid-gap: 1em;
+    }
+    .filter-container {
+        width: 80%;
+    }
+}
+
 @media only screen and (max-width: 825px) {
     form {
         width: 70%;
     }
     .card {
-        width: 6em;
-        height: 7.2em;
+        width: 7em;
+        height: 8.4em;
     }
     .card.wide {
         width: 10em;
@@ -423,7 +512,7 @@ form {
     }
 
     .content {
-        grid-gap: 0.25em;
+        grid-gap: 0.75em;
         padding: 0.25em;
     }
 }

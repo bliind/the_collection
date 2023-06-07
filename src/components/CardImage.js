@@ -40,7 +40,7 @@ export class CardImage extends Component {
     render() {
         const {src, alt} = this.state;
 
-        return <img src={src} alt={alt} onError={this.onError.bind(this)} />;
+        return <img loading='lazy' src={src} alt={alt} onError={this.onError.bind(this)} />;
     }
 }
 

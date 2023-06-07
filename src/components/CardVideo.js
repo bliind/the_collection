@@ -26,7 +26,7 @@ export class CardVideo extends Component {
         const {src} = this.state;
 
         return (<>
-            {null == src ?
+            {null === src || '' === src ?
                 <NoVideo card={card} />
                 :
                 <video style={{maxHeight: '90vh', maxWidth: '100vw'}} muted loop autoPlay src={src}></video>

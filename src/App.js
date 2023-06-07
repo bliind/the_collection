@@ -26,10 +26,11 @@ class App extends Component {
             card_name: '',
             variant_name: '',
             artist_name: '',
-            image_link: '',
+            image_link: 'noimage.webp',
             video_link: '',
             release_status: 'UNRELEASED',
             video_status: 'NEEDED',
+            tags: '',
         }
         for (let i = 0; i < 100; i++) {
             dummyCards.push(dummyCard);
@@ -39,7 +40,6 @@ class App extends Component {
             user: user,
             init: false,
             cards: dummyCards,
-            // urlBase: 'http://localhost:8000/collection',
             urlBase: 'https://snaptracker.me/collection',
         };
 
@@ -98,11 +98,12 @@ class App extends Component {
     }
 
     render() {
-        const {user, cards, urlBase} = this.state;
+        const {init, user, cards, urlBase} = this.state;
 
         return (
             <Router>
                 <AppContext.Provider value={{
+                    init,
                     cards,
                     user,
                     urlBase,

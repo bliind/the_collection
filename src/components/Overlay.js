@@ -19,7 +19,11 @@ export class Overlay extends Component {
                 <div className={`overlay ${overlayActive ? 'active' : ''}`} onClick={this.onClick.bind(this)}>
                     {card ? (
                         <div  style={{display: 'flex', flexDirection: 'column', textAlign: 'center', fontSize: '1.2em'}}>
-                            <CardVideo card={card} />
+                            <div className='video-holder'>
+                                {/* <div className='left-arrow'></div> */}
+                                <CardVideo card={card} />
+                                {/* <div className='right-arrow'></div> */}
+                            </div>
                             {user?.editor === '1' ? <><Link className='edit-link' to={`/collection/edit/${card.id}`}>✏ Edit</Link><br /></> : ''}
                             {card.card_name} {card.variant_name ? ` - ${card.variant_name}` : ''}
                             <br />

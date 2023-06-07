@@ -4,29 +4,23 @@ export class Controls extends Component {
     constructor(props) {
         super(props);
 
-        this.setSelectedStyle = this.setSelectedStyle.bind(this);
+        this.showUnreleased = this.showUnreleased.bind(this);
+        this.showNeeded = this.showNeeded.bind(this);
     }
 
-    setSelectedStyle(e) {
-        this.props.setSelectedStyle(e.target.value);
+    showUnreleased() {
+        this.props.toggleShowUnreleased();
+    }
+    showNeeded() {
+        this.props.toggleShowNeeded();
     }
 
     render() {
-        // const {styles, selectedStyle} = this.props;
-
+        const {showNeeded, showUnreleased} = this.props;
         return (
             <div className='controls'>
-                {/* <div className='control-dropdown'>
-                    <label htmlFor='set-series'>Style</label>
-                    <div className='select series-select'>
-                        <select id='set-series' onChange={this.setSelectedStyle} value={selectedStyle}>
-                            <option value='All'>All</option>
-                            {styles.map(style => (
-                                style === null ? '' : <option key={style} value={style}>{style}</option>
-                            ))}
-                        </select>
-                    </div>
-                </div> */}
+                <button type='button' className='btn' onClick={this.showUnreleased}>{showUnreleased ? '✔' : '✖'} Unreleased</button>
+                <button type='button' className='btn' onClick={this.showNeeded}>{showNeeded ? '✔' : '✖'} Needed</button>
             </div>
         )
     }
